@@ -1,151 +1,136 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
+  SafeAreaView,
 } from 'react-native';
-import Colors from '../constants/colors';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { colors } from '../constants/colors';
+import {navigate} from '../navigators/RootNavigation';
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
+import CustomDropdown from '../components/CustomDropdown';
+
 const RegisterScreen = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: '',
+  });
+
+  const roles = [
+    { id: 'developer', name: 'Developer' },
+    { id: 'designer', name: 'Designer' },
+    { id: 'product_manager', name: 'Product Manager' },
+    { id: 'other', name: 'Other' },
+  ];
+
   return (
-    <View style={styles.container}>
-                <Image style={styles.logo} source={require('../assets/logo.png')} />
+    <SafeAreaView style={styles.container}>
+      <Image style={styles.logo} source={require('../assets/logo.png')} />
 
-      <Text style={styles.heading}>No account yet</Text>
-      <Text style={styles.subHeading}>
-        Sign up and start making developments easier
-      </Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        placeholderTextColor="#888"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#888"
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#888"
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Role"
-        placeholderTextColor="#888"
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInText}>Sign In</Text>
+      <Text style={styles.heading}>Create Account</Text>
+      <TouchableOpacity onPress={() => navigate('Login')}>
+        <Text style={styles.subHeading}>
+          Already have an account? Sign in
+        </Text>
       </TouchableOpacity>
 
-      <Text style={styles.orText}>or</Text>
+      <View style={styles.form}>
+        <CustomInput
+          label="Full Name"
+          placeholder="Enter your full name"
+          value={formData.name}
+          onChangeText={(text) => setFormData({...formData, name: text})}
+        />
 
-      <TouchableOpacity style={styles.socialButton}>
-      <Icon name="google" size={20} color='red' />  
-        <Text style={styles.socialButtonText}> Continue with Google</Text>
-      </TouchableOpacity>
+        <CustomInput
+          label="Email"
+          placeholder="Enter your email"
+          value={formData.email}
+          onChangeText={(text) => setFormData({...formData, email: text})}
+        />
 
-      {/* <TouchableOpacity style={styles.socialButton}>
-        <Text style={styles.socialButtonText}>Continue with Apple</Text>
-      </TouchableOpacity> */}
+        <CustomInput
+          label="Password"
+          placeholder="Create a password"
+          secureTextEntry
+          value={formData.password}
+          onChangeText={(text) => setFormData({...formData, password: text})}
+        />
+
+        <CustomDropdown
+          label="Role"
+          placeholder="Select your role"
+          value={formData.role}
+          onChange={(value) => setFormData({...formData, role: value})}
+          options={roles}
+        />
+
+        <CustomButton
+          style={styles.signUpButton}
+          onPress={() => navigate('Home')}>
+          Create Account
+        </CustomButton>
+      </View>
 
       <Text style={styles.footerText}>
-        By clicking continue, you agree to our{' '}
+        By creating an account, you agree to our{' '}
         <Text style={styles.linkText}>Terms of Service</Text> and{' '}
         <Text style={styles.linkText}>Privacy Policy</Text>.
       </Text>
-    </View>
+    </SafeAreaView>
   );
 };
-
-export default RegisterScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.background[100],
     padding: 20,
-    // alignItems:'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.background,
   },
   logo: {
-    alignSelf:'center',
-    width: 200,
-    height: 200,
-    backgroundColor:Colors.primary,
+    alignSelf: 'center',
+    width: 80,
+    height: 80,
     resizeMode: 'contain',
-    marginBottom: 30,
-},
+    marginTop: 20,
+    marginBottom: 20,
+  },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: Colors.text,
-    marginBottom: 8,
+    color: colors.text[100],
+    marginBottom: 4,
   },
   subHeading: {
     fontSize: 16,
     textAlign: 'center',
-    color: Colors.textLight,
+    color: colors.text[200],
     marginBottom: 20,
   },
-  input: {
-    height: 40,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    backgroundColor: '#fff',
+  form: {
+    gap: 12,
   },
-  signInButton: {
-    height: 40,
-    backgroundColor: Colors.primary,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  signInText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  orText: {
-    textAlign: 'center',
-    color: Colors.textLight,
-    marginVertical: 10,
-  },
-  socialButton: {
-    height: 50,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 8,
-    flexDirection:'row',
-    justifyContent: 'center',
-    gap:5,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  socialButtonText: {
-    color: Colors.text,
-    fontSize: 16,
+  signUpButton: {
+    marginTop: 4,
+    backgroundColor: colors.accent[100],
   },
   footerText: {
     fontSize: 12,
     textAlign: 'center',
-    color: Colors.textLight,
-    marginTop: 20,
+    color: colors.text[200],
+    marginTop: 'auto',
+    marginBottom: 16,
   },
   linkText: {
-    color: Colors.primary,
+    color: colors.accent[100],
     textDecorationLine: 'underline',
   },
 });
+
+export default RegisterScreen;

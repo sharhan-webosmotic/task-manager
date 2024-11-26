@@ -1,53 +1,59 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import Colors from '../constants/colors';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { colors } from '../constants/colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {navigate} from '../navigators/RootNavigation';
+import CustomInput from '../components/CustomInput';
+import CustomButton from '../components/CustomButton';
+
 const LoginScreen = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
   return (
     <View style={styles.container}>
-                <Image style={styles.logo} source={require('../assets/logo.png')} />
+      <Image style={styles.logo} source={require('../assets/logo.png')} />
 
-      <Text style={styles.heading}>No account yet</Text>
-      <Text style={styles.subHeading}>
-        Sign up and start making developments easier
-      </Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#888"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#888"
-        secureTextEntry={true}
-      />
-
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInText}>Sign In</Text>
+      <Text style={styles.heading}>Welcome Back</Text>
+      <TouchableOpacity onPress={() => navigate('Register')}>
+        <Text style={styles.subHeading}>
+          Don't have an account? Sign up now
+        </Text>
       </TouchableOpacity>
 
-      <Text style={styles.orText}>or</Text>
+      <View style={styles.form}>
+        <CustomInput
+          label="Email"
+          placeholder="Enter your email"
+          value={formData.email}
+          onChangeText={(text) => setFormData({...formData, email: text})}
+        />
 
-      <TouchableOpacity style={styles.socialButton}>
-      <Icon name="google" size={20} color='red' />  
-        <Text style={styles.socialButtonText}> Continue with Google</Text>
-      </TouchableOpacity>
+        <CustomInput
+          label="Password"
+          placeholder="Enter your password"
+          secureTextEntry
+          value={formData.password}
+          onChangeText={(text) => setFormData({...formData, password: text})}
+        />
 
-      {/* <TouchableOpacity style={styles.socialButton}>
-        <Text style={styles.socialButtonText}>Continue with Apple</Text>
-      </TouchableOpacity> */}
+        <CustomButton
+          onPress={() => navigate('Home')}
+          style={styles.signInButton}>
+          Sign In
+        </CustomButton>
+      </View>
 
       <Text style={styles.footerText}>
-        By clicking continue, you agree to our{' '}
+        By continuing, you agree to our{' '}
         <Text style={styles.linkText}>Terms of Service</Text> and{' '}
         <Text style={styles.linkText}>Privacy Policy</Text>.
       </Text>
@@ -55,86 +61,51 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    // alignItems:'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.background,
+    backgroundColor: colors.background[100],
   },
   logo: {
-    alignSelf:'center',
-    width: 200,
-    height: 200,
-    backgroundColor:Colors.primary,
+    alignSelf: 'center',
+    width: 120,
+    height: 120,
     resizeMode: 'contain',
-    marginBottom: 30,
-},
+    marginTop: 60,
+    marginBottom: 40,
+  },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: Colors.text,
+    color: colors.text[100],
     marginBottom: 8,
   },
   subHeading: {
     fontSize: 16,
     textAlign: 'center',
-    color: Colors.textLight,
-    marginBottom: 20,
+    color: colors.text[200],
+    marginBottom: 32,
   },
-  input: {
-    height: 40,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    backgroundColor: '#fff',
+  form: {
+    gap: 16,
   },
   signInButton: {
-    height: 40,
-    backgroundColor: Colors.primary,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  signInText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  orText: {
-    textAlign: 'center',
-    color: Colors.textLight,
-    marginVertical: 10,
-  },
-  socialButton: {
-    height: 50,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 8,
-    flexDirection:'row',
-    justifyContent: 'center',
-    gap:5,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  socialButtonText: {
-    color: Colors.text,
-    fontSize: 16,
+    marginTop: 8,
+    backgroundColor: colors.accent[100],
   },
   footerText: {
     fontSize: 12,
     textAlign: 'center',
-    color: Colors.textLight,
-    marginTop: 20,
+    color: colors.text[200],
+    marginTop: 'auto',
+    marginBottom: 20,
   },
   linkText: {
-    color: Colors.primary,
+    color: colors.accent[100],
     textDecorationLine: 'underline',
   },
 });
+
+export default LoginScreen;
