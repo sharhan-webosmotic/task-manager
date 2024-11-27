@@ -38,7 +38,7 @@ const CustomHeader = () => {
                 : 'keyboard-arrow-down'
             }
             size={24}
-            color={colors.primary}
+            color={colors.text[100]}
           />
         </TouchableOpacity>
 
@@ -66,15 +66,15 @@ const CustomHeader = () => {
             <Text style={styles.activeTabText}>Tasks</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.tab}>
-            <Icon name="people" size={20} color={colors.primary} />
+            <Icon name="people" size={20} color={colors.text[100]} />
             <Text style={styles.tabText}>Team</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.tab}>
-            <Icon name="filter-list" size={20} color={colors.primary} />
+            <Icon name="filter-list" size={20} color={colors.text[100]} />
             <Text style={styles.tabText}>Filters</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.tab}>
-            <Icon name="timeline" size={20} color={colors.primary} />
+            <Icon name="timeline" size={20} color={colors.text[100]} />
             <Text style={styles.tabText}>Timeline</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -102,8 +102,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     backgroundColor: colors.background[300],
     borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.primary[100],
+    // borderColor: colors.primary[100],
   },
   projectName: {
     fontSize: 18,
@@ -148,8 +147,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     borderRadius: 12,
     backgroundColor: colors.background[300],
-    borderWidth: 1,
-    borderColor: colors.primary[100],
+    // borderColor: colors.primary[100],
   },
   activeTab: {
     backgroundColor: colors.accent[100],
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     marginLeft: 8,
-    color: colors.primary,
+    color: colors.text[100],
     fontWeight: '500',
   },
   activeTabText: {

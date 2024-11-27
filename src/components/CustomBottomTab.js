@@ -1,61 +1,59 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../constants/colors';
 import {navigate} from '../navigators/RootNavigation';
+import {BOTTOM_TAB_OPTIONS} from '../constants/default';
 
 const CustomBottomTab = () => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <TouchableOpacity style={[styles.tab, styles.activeTab]}>
-          <View style={styles.iconContainer}>
-            <Icon name="home" size={24} color={colors.primary} />
-          </View>
-          <Text style={styles.activeTabText}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.tab}>
-          <View style={styles.iconContainer}>
-            <Icon name="notifications" size={24} color={colors.text[300]} />
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>2</Text>
-            </View>
-          </View>
-          <Text style={styles.tabText}>Alerts</Text>
-        </TouchableOpacity>
-
+  const renderTab = (option, isActive = false) => {
+    if (option.isSpecial) {
+      return (
         <TouchableOpacity
-          onPress={() => navigate('AddTask')}
+          key={option.id}
+          onPress={() => navigate(option.route)}
           style={styles.addButtonContainer}>
           <View style={styles.addButton}>
-            <Icon name="add" size={28} color={colors.accent[100]} />
+            <Icon name={option.icon} size={28} color={colors.background[100]} />
           </View>
         </TouchableOpacity>
+      );
+    }
 
-        <TouchableOpacity style={styles.tab}>
-          <View style={styles.iconContainer}>
-            <Icon name="person" size={24} color={colors.text[300]} />
-          </View>
-          <Text style={styles.tabText}>Profile</Text>
-        </TouchableOpacity>
+    return (
+      <TouchableOpacity
+        key={option.id}
+        style={[styles.tab, isActive && styles.activeTab]}
+        onPress={() => navigate(option.route)}>
+        <View style={styles.iconContainer}>
+          <Icon
+            name={option.icon}
+            size={24}
+            color={isActive ? colors.background[100] : colors.text[100]}
+          />
+          {option.showBadge && (
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>{option.badgeCount}</Text>
+            </View>
+          )}
+        </View>
+        <Text style={isActive ? styles.activeTabText : styles.tabText}>
+          {option.label}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
-        <TouchableOpacity style={styles.tab} onPress={() => navigate('Login')}>
-          <View style={styles.iconContainer}>
-            <Icon name="logout" size={24} color={colors.text[300]} />
-          </View>
-          <Text style={styles.tabText}>Logout</Text>
-        </TouchableOpacity>
-      </View>
+  return (
+    <View style={styles.contentContainer}>
+      {BOTTOM_TAB_OPTIONS.map((option, index) =>
+        renderTab(option, index === 0),
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.background[200],
-    paddingBottom: 4,
-  },
   contentContainer: {
     flexDirection: 'row',
     marginHorizontal: 16,
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   activeTab: {
-    backgroundColor: colors.text[300],
+    backgroundColor: colors.text[100],
   },
   iconContainer: {
     position: 'relative',
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButton: {
-    backgroundColor: colors.text[300],
+    backgroundColor: colors.text[100],
     width: 50,
     height: 50,
     borderRadius: 25,
@@ -102,8 +100,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 8,
-    borderWidth: 4,
-    borderColor: colors.background[200],
   },
   badge: {
     position: 'absolute',
@@ -124,14 +120,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   activeTabText: {
-    color: colors.text[100],
-    fontSize: 11,
+    color: colors.background[100],
+    fontSize: 12,
     marginTop: 2,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   tabText: {
-    color: colors.text[300],
-    fontSize: 11,
+    color: colors.text[100],
+    fontWeight: '700',
+    fontSize: 12,
     marginTop: 2,
   },
 });

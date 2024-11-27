@@ -59,12 +59,15 @@ const HomeScreen = () => {
     <View style={styles.taskItem}>
       <View style={styles.taskHeader}>
         <TouchableOpacity
-          style={[styles.completeButton, item.completed && styles.completeButtonActive]}
+          style={[
+            styles.completeButton,
+            item.completed && styles.completeButtonActive,
+          ]}
           onPress={() => handleTaskCompletion(item.id)}>
-          <Icon 
-            name={item.completed ? 'check' : 'check'} 
-            size={20} 
-            color={item.completed ? colors.text[300] : colors.text[200]} 
+          <Icon
+            name={item.completed ? 'check' : 'check'}
+            size={20}
+            color={item.completed ? colors.text[100] : colors.text[200]}
           />
         </TouchableOpacity>
         <View style={styles.taskTitleContainer}>
@@ -78,10 +81,12 @@ const HomeScreen = () => {
           {item.tags.length > 0 && (
             <View style={styles.tagsContainer}>
               {item.tags.map((tag, index) => (
-                <View key={index}  style={[
-                  styles.tag,
-                  { backgroundColor: tagColors [tag] || colors.background[200] }
-                ]}>
+                <View
+                  key={index}
+                  style={[
+                    styles.tag,
+                    {backgroundColor: tagColors[tag] || colors.background[200]},
+                  ]}>
                   <Text style={styles.tagText}>{tag}</Text>
                 </View>
               ))}
@@ -110,7 +115,7 @@ const HomeScreen = () => {
               <Icon
                 name="keyboard-arrow-down"
                 size={16}
-                color={colors.accent[100]}
+                color={colors.text[100]}
               />
             </View>
           </TouchableOpacity>
@@ -122,12 +127,12 @@ const HomeScreen = () => {
         )}
 
         <TouchableOpacity style={styles.actionButton}>
-          <Icon name="local-offer" size={20} color={colors.accent[300]} />
-          <Text style={styles.actionText}>Tags</Text>
+          <Icon name="local-offer" size={20} color={colors.tag[100]} />
+          <Text style={styles.tagsOption}>Tags</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.actionButton}>
-          <Icon name="more-horiz" size={20} color={colors.accent[300]} />
+          <Icon name="more-horiz" size={20} color={colors.text[200]} />
         </TouchableOpacity>
       </View>
     </View>
@@ -142,7 +147,7 @@ const HomeScreen = () => {
           }}
           icon="add-task"
           variant="solid"
-          textColor={colors.text[300]}
+          textColor={colors.text[100]}
           style={styles.addButton}>
           New Task
         </CustomButton>
@@ -164,7 +169,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.accent[200],
+    backgroundColor: colors.background[100],
   },
   addTaskContainer: {
     padding: 16,
@@ -240,7 +245,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     marginLeft: 4,
-    color: colors.accent[300],
+    color: colors.accent[100],
   },
   tagsContainer: {
     flexDirection: 'row',
@@ -257,7 +262,7 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 12,
-    color: colors.text[300],
+    color: colors.text[100],
   },
   taskListContent: {
     padding: 16,
@@ -269,8 +274,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.primary[100],
+    // borderWidth: 1,
+    // borderColor: colors.primary[100],
   },
   assigneeAvatar: {
     width: 24,
@@ -282,12 +287,18 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   avatarText: {
-    color: colors.text[300],
+    color: colors.text[100],
     fontSize: 12,
     fontWeight: '600',
   },
   assigneeText: {
     color: colors.text[100],
+    fontSize: 14,
+    marginRight: 4,
+    maxWidth: 100,
+  },
+  tagsOption: {
+    color: colors.tag[100],
     fontSize: 14,
     marginRight: 4,
     maxWidth: 100,

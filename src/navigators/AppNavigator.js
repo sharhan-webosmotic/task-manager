@@ -7,6 +7,8 @@ import {navigationRef} from './RootNavigation';
 import HomeScreen from '../screens/HomeScreen';
 import CustomHeader from '../components/CustomHeader';
 import AddTaskScreen from '../screens/AddTaskScreen';
+import AlertScreen from '../screens/AlertScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +35,21 @@ const AppNavigator = () => {
           }}
         />
         <Stack.Screen name="AddTask" options={{headerShown:false}} component={AddTaskScreen} />
+        <Stack.Screen
+          name="Alerts"
+          component={AlertScreen}
+          options={{
+            header: () => <CustomHeader />,
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

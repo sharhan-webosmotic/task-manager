@@ -46,7 +46,7 @@ const CustomDropdown = ({
         <Icon
           name={isOpen ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
           size={24}
-          color={colors.primary}
+          color={colors.text[100]}
         />
       </TouchableOpacity>
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500',
-    color: colors.text,
+    color: colors.text[100],
     marginBottom: 6,
   },
   selector: {
@@ -109,17 +109,16 @@ const styles = StyleSheet.create({
     color: '#94A3B8',
   },
   selectedText: {
-    color: colors.text,
+    color: colors.text[100],
   },
   dropdown: {
     position: 'absolute',
     top: 66,
     left: 0,
     right: 0,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background[200],
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
+
     maxHeight: 200,
     elevation: 4,
     shadowColor: '#000',
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   optionText: {
-    color: colors.text,
+    color: colors.text[100],
   },
   avatar: {
     width: 24,

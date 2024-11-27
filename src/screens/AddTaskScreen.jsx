@@ -14,11 +14,11 @@ import CustomDropdown from '../components/CustomDropdown';
 import CustomFormHeader from '../components/CustomFormHeader';
 
 const tagColors = {
-  Frontend: '#FF7676',    // Light red
-  Backend: '#76A5FF',     // Light blue
-  Priority: '#FFD876',    // Light yellow
-  Bug: '#FF6B6B',        // Red
-  Feature: '#92D36E',    // Light green
+  Frontend: '#FF7676', // Light red
+  Backend: '#76A5FF', // Light blue
+  Priority: '#FFD876', // Light yellow
+  Bug: '#FF6B6B', // Red
+  Feature: '#92D36E', // Light green
 };
 
 const TagInput = ({value = [], onChange}) => {
@@ -40,15 +40,17 @@ const TagInput = ({value = [], onChange}) => {
     <View style={styles.tagInputContainer}>
       <View style={styles.selectedTags}>
         {value.map((tag, index) => (
-          <View 
-            key={index} 
+          <View
+            key={index}
             style={[
               styles.tag,
-              { backgroundColor: tagColors[tag] || colors.background[300] }
+              {backgroundColor: tagColors[tag] || colors.background[300]},
             ]}>
-            <Text style={[styles.tagText, { color: colors.text[300] }]}>{tag}</Text>
+            <Text style={[styles.tagText, {color: colors.text[100]}]}>
+              {tag}
+            </Text>
             <TouchableOpacity onPress={() => handleRemoveTag(tag)}>
-              <Icon name="close" size={16} color={colors.text[300]} />
+              <Icon name="close" size={16} color={colors.text[100]} />
             </TouchableOpacity>
           </View>
         ))}
@@ -68,10 +70,10 @@ const TagInput = ({value = [], onChange}) => {
             key={index}
             style={[
               styles.predefinedTag,
-              { backgroundColor: tagColors[tag] || colors.background[200] }
+              {backgroundColor: tagColors[tag] || colors.background[200]},
             ]}
             onPress={() => handleAddTag(tag)}>
-            <Text style={[styles.predefinedTagText, { color: colors.text[300] }]}>
+            <Text style={[styles.predefinedTagText, {color: colors.text[100]}]}>
               {tag}
             </Text>
           </TouchableOpacity>
@@ -140,14 +142,14 @@ const AddTaskScreen = () => {
       </ScrollView>
 
       <View style={styles.footer}>
-        <CustomButton
+        {/* <CustomButton
           variant="outline"
           style={styles.footerButton}
           onPress={() => {}}>
           Cancel
-        </CustomButton>
+        </CustomButton> */}
         <CustomButton
-          textColor={colors.text[300]}
+          textColor={colors.text[100]}
           style={styles.footerButton}
           onPress={handleSubmit}>
           Create Task

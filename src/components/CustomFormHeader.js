@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../constants/colors';
 import {goBack} from '../navigators/RootNavigation';
-import { color } from 'react-native-elements/dist/helpers';
+import {color} from 'react-native-elements/dist/helpers';
 
 const CustomFormHeader = ({title, onBack}) => {
   const handleBack = () => {
@@ -16,11 +16,9 @@ const CustomFormHeader = ({title, onBack}) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity 
-        style={styles.backButton} 
-        onPress={handleBack}>
+      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
         <View style={styles.iconContainer}>
-          <Icon name="arrow-back" size={22} color={colors.text[300]} />
+          <Icon name="arrow-back" size={22} color={colors.text[100]} />
         </View>
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
@@ -50,18 +48,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accent[100],
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
+    // borderWidth: 1,
+    // borderColor: '#E2E8F0',
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: colors.text[100]     
-,
+    color: colors.text[100],
   },
   placeholder: {
     width: 40,
   },
 });
 
-export default CustomFormHeader; 
+export default CustomFormHeader;
