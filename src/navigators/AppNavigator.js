@@ -9,6 +9,7 @@ import CustomHeader from '../components/CustomHeader';
 import AddTaskScreen from '../screens/AddTaskScreen';
 import AlertScreen from '../screens/AlertScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import TeamScreen from '../screens/TeamScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,13 +35,17 @@ const AppNavigator = () => {
             headerShown: true,
           }}
         />
-        <Stack.Screen name="AddTask" options={{headerShown:false}} component={AddTaskScreen} />
+        <Stack.Screen
+          name="AddTask"
+          options={{headerShown: false}}
+          component={AddTaskScreen}
+        />
         <Stack.Screen
           name="Alerts"
           component={AlertScreen}
           options={{
             header: () => <CustomHeader />,
-            headerShown: true,
+            headerShown: false,
           }}
         />
         <Stack.Screen
@@ -48,6 +53,14 @@ const AppNavigator = () => {
           component={ProfileScreen}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Team"
+          component={TeamScreen}
+          options={{
+            header: () => <CustomHeader />,
+            headerShown: true,
           }}
         />
       </Stack.Navigator>

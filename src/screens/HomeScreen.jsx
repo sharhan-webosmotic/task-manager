@@ -20,6 +20,7 @@ const HomeScreen = () => {
     id: '1',
     name: 'Mobile App Development',
   });
+  const [activeTab, setActiveTab] = useState('tasks');
 
   const projects = [
     {id: '1', name: 'Mobile App Development'},
@@ -140,6 +141,45 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.tabContainer}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'tasks' && styles.activeTab]}
+            onPress={() => setActiveTab('tasks')}>
+            <Icon
+              name="list"
+              size={20}
+              color={activeTab === 'tasks' ? 'white' : colors.text[100]}
+            />
+            <Text
+              style={activeTab === 'tasks' ? styles.activeTabText : styles.tabText}>
+              Tasks
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'team' && styles.activeTab]}
+            onPress={() => setActiveTab('team')}>
+            <Icon
+              name="people"
+              size={20}
+              color={activeTab === 'team' ? 'white' : colors.text[100]}
+            />
+            <Text
+              style={activeTab === 'team' ? styles.activeTabText : styles.tabText}>
+              Team
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.tab}>
+            <Icon name="filter-list" size={20} color={colors.text[100]} />
+            <Text style={styles.tabText}>Filters</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.tab}>
+            <Icon name="timeline" size={20} color={colors.text[100]} />
+            <Text style={styles.tabText}>Timeline</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+
       <View style={styles.addTaskContainer}>
         <CustomButton
           onPress={() => {
@@ -302,6 +342,35 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginRight: 4,
     maxWidth: 100,
+  },
+  tabContainer: {
+    backgroundColor: colors.background[200],
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.background[300],
+  },
+  tab: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginHorizontal: 4,
+    borderRadius: 12,
+    backgroundColor: colors.background[300],
+  },
+  activeTab: {
+    backgroundColor: colors.accent[100],
+    borderColor: colors.accent[100],
+  },
+  tabText: {
+    marginLeft: 8,
+    color: colors.text[100],
+    fontWeight: '500',
+  },
+  activeTabText: {
+    marginLeft: 8,
+    color: 'white',
+    fontWeight: '500',
   },
 });
 
